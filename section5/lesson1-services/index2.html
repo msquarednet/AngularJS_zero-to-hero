@@ -1,0 +1,126 @@
+<!DOCTYPE html >
+<html lang="en" ng-app="codecraft" >
+<head >
+	<title >Contacts</title >
+	<link href="../libs/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" >
+	<link href="main.css" rel="stylesheet" >
+</head >
+
+<body >
+<nav class="navbar navbar-inverse navbar-fixed-top" >
+	<div class="container" >
+		<div class="navbar-header" >
+			<a class="navbar-brand"
+			   href="/" >Contacts
+			</a >
+		</div >
+	</div >
+</nav >
+
+<div class="container main-content" >
+
+
+	<div class="row" >
+		<div class="col-md-8" ng-controller="PersonListController as vmList">
+
+			<form class="form-inline well well-sm" >
+				<span class="glyphicon glyphicon-search" ></span >
+
+				<div class="form-group" >
+						<input type="text"
+						       class="form-control"
+						       id="name"
+						       ng-model="vmList.search"
+						       placeholder="Search name..."
+								/>
+				</div >
+
+				<span class="glyphicon glyphicon-sort-by-attributes" ></span >
+
+				<div class="form-group" >
+					<select class="form-control"
+									ng-model="vmList.order">
+						<option value="name" >Name (ASC)</option >
+						<option value="-name" >Name (DEC)</option >
+						<option value="email" >Email (ASC)</option >
+						<option value="-email" >Email (DEC)</option >
+					</select >
+				</div >
+
+			</form >
+				
+							
+			<table class="table table-bordered" >
+
+				<tr >
+					<th >#</th >
+					<th >Name
+						<span ng-click="vmList.order = 'name'" class="glyphicon glyphicon-menu-up"></span>
+						<span ng-click="vmList.order = '-name'" class="glyphicon glyphicon-menu-down"></span>
+					</th >
+					<th >Email
+						<span ng-click="vmList.order = 'email'" class="glyphicon glyphicon-menu-up"></span>
+						<span ng-click="vmList.order = '-email'" class="glyphicon glyphicon-menu-down"></span>
+					</th >
+					<th >Birthday</th >
+				</tr >
+
+				<tr ng-repeat="person in filteredPersons = (vmList.contactSvc.persons | filter:vmList.sensitiveSearch | orderBy:vmList.order)"
+				    ng-style="{
+							 'background-color': person.email == vmList.contactSvc.selectedPerson.email ? 'lightgray' : ''
+						}"
+				    ng-click="vmList.contactSvc.selectedPerson = person" >
+					<td >{{ $index }}</td >
+					<td >{{ person.name }}</td >
+					<td >{{ person.email }}</td >
+					<td >{{ person.birthdate | date:"longDate" }}</td >
+				</tr >
+				<tr ng-show="filteredPersons.length == 0">
+					<td colspan="4">
+						<div class="alert alert-info">
+							<p class="text-center">No results found for search term '{{ search }}'</p>
+						</div>
+					</td>
+				</tr>
+
+
+			</table >
+
+		</div >
+		<div class="col-md-4" ng-controller="PersonDetailController  as vmDetail">
+
+			<div class="panel panel-default" >
+				<div class="panel-heading" >Details</div >
+				<div class="panel-body" >
+
+					<dl >
+						<dt >Name</dt >
+						<dd >{{vmDetail.contactSvc.selectedPerson.name}}</dd >
+						<dt >Email</dt >
+						<dd >{{vmDetail.contactSvc.selectedPerson.email}}</dd >
+						<dt >Birthday</dt >
+						<dd >{{vmDetail.contactSvc.selectedPerson.birthdate | date:"longDate"}}</dd >
+						<dt >Phonenumber</dt >
+						<dd >{{vmDetail.contactSvc.selectedPerson.phonenumber}}</dd >
+						<dt >Address</dt >
+						<dd >{{vmDetail.contactSvc.selectedPerson.address}}</dd >
+						<dt >City</dt >
+						<dd >{{vmDetail.contactSvc.selectedPerson.city}}</dd >
+						<dt >Country</dt >
+						<dd >{{vmDetail.contactSvc.selectedPerson.country}}</dd >
+					</dl >
+
+				</div >
+			</div >
+
+		</div >
+	</div >
+
+
+</div >
+
+
+<script src="../libs/angular/angular.min.js" ></script >
+<script src="main2.js" ></script >
+</body >
+</html >
