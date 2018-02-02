@@ -22,7 +22,7 @@ app.config(function ($httpProvider, $resourceProvider, laddaProvider, $datepicke
 });
 
 app.factory("Contact", function ($resource) {
-	return $resource("https://codecraftpro.com/api/samples/v1/contact/:id/", {id: '@id'}, {
+	return $resource("https://api.codecraft.tv/samples/v1/contact/:id/", {id: '@id'}, {
 		update: {
 			method: 'PUT'
 		}

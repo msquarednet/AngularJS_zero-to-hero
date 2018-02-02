@@ -20,8 +20,8 @@ app.config(function($httpProvider, $resourceProvider, laddaProvider, $datepicker
 });
 //just for this course
 app.factory('Contact', function($resource) {	//ALL CRUD!
-//	return $resource('https://codecraftpro.com/api/samples/v1/contact/:id/');	// reminder: ':id' is optional, so GET list or single contact
-	return $resource('https://codecraftpro.com/api/samples/v1/contact/:id/', {id:'@id'}, {
+//	return $resource('https://api.codecraft.tv/samples/v1/contact/:id/');	// reminder: ':id' is optional, so GET list or single contact
+	return $resource('https://api.codecraft.tv/samples/v1/contact/:id/', {id:'@id'}, {
 		update: {method: 'PUT'}
 	});	//$resource does not support 'update/PUT' by default, so we have to add it. 
 });

@@ -7,7 +7,7 @@ app.config(function($httpProvider, $resourceProvider) {
 });
 
 app.factory('Contact', function($resource) {
-	return $resource('https://codecraftpro.com/api/samples/v1/contact/:id/');	// reminder: ':id' is optional, so GET list or single contact
+	return $resource('https://api.codecraft.tv/samples/v1/contact/:id/');	// reminder: ':id' is optional, so GET list or single contact
 });
 
 
